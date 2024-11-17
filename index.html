@@ -3,44 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Market Dashboard</title>
+    <title>NY MKT Insights - Market Intelligence Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
-        <header>
-            <h1>Stock Market Dashboard</h1>
-        </header>
-        <main>
-            <div class="watchlist">
-                <h2>Watchlist</h2>
-                <ul id="watchlist">
-                    <!-- Watchlist items will be dynamically added here -->
-                </ul>
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h1>NY MKT Insights</h1>
             </div>
-            <div class="stock-details">
-                <h2>Stock Details</h2>
-                <div id="stock-info">
-                    <!-- Stock details will be displayed here -->
+            <div class="menu">
+                <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-star"></i> Watchlist</a>
+                <a href="#"><i class="fas fa-search"></i> Market Search</a>
+                <a href="#"><i class="fas fa-chart-bar"></i> Analysis</a>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <header>
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search" placeholder="Search for stocks...">
+                </div>
+                <div class="market-summary">
+                    <div class="market-item">
+                        <span>S&P 500</span>
+                        <span class="positive">+1.2%</span>
+                    </div>
+                    <div class="market-item">
+                        <span>NASDAQ</span>
+                        <span class="negative">-0.3%</span>
+                    </div>
+                    <div class="market-item">
+                        <span>DOW</span>
+                        <span class="positive">+0.8%</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid-container">
+                <div class="card watchlist-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-star"></i> Watchlist</h2>
+                        <button class="btn-secondary"><i class="fas fa-plus"></i> Add New</button>
+                    </div>
+                    <ul id="watchlist">
+                        <!-- Watchlist items will be dynamically added here -->
+                    </ul>
+                </div>
+
+                <div class="card details-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chart-line"></i> Stock Details</h2>
+                        <div class="timeframe-selector">
+                            <button class="btn-timeframe active">1D</button>
+                            <button class="btn-timeframe">1W</button>
+                            <button class="btn-timeframe">1M</button>
+                            <button class="btn-timeframe">1Y</button>
+                        </div>
+                    </div>
+                    <div id="stock-info">
+                        <!-- Stock details will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="card market-table-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-table"></i> Market Overview</h2>
+                        <div class="filter-buttons">
+                            <button class="btn-filter active">All</button>
+                            <button class="btn-filter">Technology</button>
+                            <button class="btn-filter">Finance</button>
+                            <button class="btn-filter">Healthcare</button>
+                        </div>
+                    </div>
+                    <table id="stock-table">
+                        <thead>
+                            <tr>
+                                <th>Stock</th>
+                                <th>Price</th>
+                                <th>Change</th>
+                                <th>Volume</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Stock list will be dynamically added here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
-        <section class="search-section">
-            <input type="text" id="search" placeholder="Search for stocks...">
-            <table id="stock-table">
-                <thead>
-                    <tr>
-                        <th>Stock Name</th>
-                        <th>Price</th>
-                        <th>Change</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Stock list will be dynamically added here -->
-                </tbody>
-            </table>
-        </section>
     </div>
     <script src="script.js"></script>
 </body>
