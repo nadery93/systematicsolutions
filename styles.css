@@ -34,6 +34,8 @@ body {
     background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 20px;
+    position: fixed;
+    height: 100vh;
 }
 
 .logo {
@@ -73,12 +75,14 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Content Area Styles */
+/* Content Area */
 .content {
     flex: 1;
+    margin-left: 250px;
     padding: 20px;
 }
 
+/* Search and Market Summary */
 header {
     display: flex;
     justify-content: space-between;
@@ -108,6 +112,32 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-result-item:hover {
+    background-color: var(--background-color);
+}
+
 .market-summary {
     display: flex;
     gap: 20px;
@@ -115,12 +145,11 @@ header {
 
 .market-item {
     background: var(--card-background);
-    padding: 10px 20px;
+    padding: 15px 25px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-width: 150px;
+    text-align: center;
 }
 
 /* Grid Layout */
@@ -141,11 +170,14 @@ header {
     grid-column: 1 / -1;
 }
 
+/* Card Headers */
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .card-header h2 {
@@ -155,7 +187,7 @@ header {
     font-size: 1.2rem;
 }
 
-/* Button Styles */
+/* Buttons */
 .btn-secondary, .btn-filter, .btn-timeframe {
     padding: 8px 15px;
     border: none;
@@ -179,52 +211,107 @@ header {
     color: white;
 }
 
-/* Table Styles */
-#stock-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Trading Controls */
+.trading-controls {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--background-color);
+    border-radius: 8px;
 }
 
-#stock-table th, #stock-table td {
-    padding: 15px;
+.trade-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.trade-input {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.trade-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-buy, .btn-sell {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-buy {
+    background: var(--positive-color);
+    color: white;
+}
+
+.btn-sell {
+    background: var(--negative-color);
+    color: white;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
 
-#stock-table th {
+th {
     font-weight: 600;
     color: var(--text-secondary);
 }
 
-#stock-table tr:hover {
-    background-color: rgba(0,0,0,0.02);
+tbody tr:hover {
+    background-color: var(--background-color);
 }
 
-/* Watchlist Styles */
+/* Watchlist */
 #watchlist {
     list-style: none;
 }
 
-#watchlist li {
-    padding: 15px;
-    border-bottom: 1px solid var(--border-color);
+.watchlist-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-#watchlist li:hover {
-    background: rgba(0,0,0,0.02);
+.watchlist-item:hover {
+    background-color: var(--background-color);
 }
 
-/* Color Indicators */
+/* Indicators */
 .positive {
     color: var(--positive-color);
 }
 
 .negative {
     color: var(--negative-color);
+}
+
+/* Stock Chart */
+.stock-chart {
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--background-color);
+    border-radius: 8px;
 }
 
 /* Responsive Design */
@@ -240,18 +327,19 @@ header {
     }
     
     .sidebar {
+        position: static;
         width: 100%;
-        padding: 10px;
+        height: auto;
+    }
+    
+    .content {
+        margin-left: 0;
     }
     
     .menu {
         display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-    }
-    
-    .menu a {
-        padding: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
     }
     
     header {
@@ -262,4 +350,24 @@ header {
     .search-container {
         width: 100%;
     }
+    
+    .market-summary {
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--background-color);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
