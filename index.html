@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NY MKT Insights - Paper Trading Dashboard</title>
+    <title>NY MKT Insights - Trading Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,79 +15,195 @@
                 <h1>NY MKT Insights</h1>
             </div>
             <div class="menu">
-                <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
-                <a href="#"><i class="fas fa-star"></i> Watchlist</a>
-                <a href="#"><i class="fas fa-search"></i> Market Search</a>
-                <a href="#"><i class="fas fa-chart-bar"></i> Analysis</a>
-                <a href="#"><i class="fas fa-history"></i> Trading History</a>
+                <a href="#dashboard" class="menu-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#my-picks" class="menu-item" data-page="my-picks">
+                    <i class="fas fa-star"></i> My Picks
+                </a>
+                <a href="#macro" class="menu-item" data-page="macro">
+                    <i class="fas fa-globe"></i> Macro Analysis
+                </a>
+                <a href="#model" class="menu-item" data-page="model">
+                    <i class="fas fa-briefcase"></i> Model Portfolio
+                </a>
+                <a href="#watchlist" class="menu-item" data-page="watchlist">
+                    <i class="fas fa-binoculars"></i> Watchlist
+                </a>
+                <a href="#analysis" class="menu-item" data-page="analysis">
+                    <i class="fas fa-chart-bar"></i> Analysis
+                </a>
             </div>
         </nav>
         
         <main class="content">
-            <header>
-                <div class="search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="search" placeholder="Search for stocks...">
-                    <div id="search-results" class="search-results"></div>
-                </div>
-                <div class="market-summary">
-                    <!-- Market indices will be dynamically added here -->
-                </div>
-            </header>
-
-            <div class="grid-container">
-                <div class="card watchlist-card">
-                    <div class="card-header">
-                        <h2><i class="fas fa-star"></i> Watchlist</h2>
-                        <div class="watchlist-controls">
-                            <span class="total-value">Portfolio Value: $0.00</span>
-                            <button class="btn-secondary" id="add-to-watchlist"><i class="fas fa-plus"></i> Add Stock</button>
+            <!-- Dashboard Page -->
+            <div class="page" id="dashboard-page">
+                <header>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search" placeholder="Search for stocks...">
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                    <div class="market-summary">
+                        <div class="market-item" id="sp500">
+                            <span>S&P 500</span>
+                            <span class="value">Loading...</span>
+                            <span class="change">...</span>
+                        </div>
+                        <div class="market-item" id="nasdaq">
+                            <span>NASDAQ</span>
+                            <span class="value">Loading...</span>
+                            <span class="change">...</span>
+                        </div>
+                        <div class="market-item" id="djia">
+                            <span>DOW</span>
+                            <span class="value">Loading...</span>
+                            <span class="change">...</span>
                         </div>
                     </div>
-                    <ul id="watchlist"></ul>
-                </div>
+                </header>
 
-                <div class="card details-card">
-                    <div class="card-header">
-                        <h2><i class="fas fa-chart-line"></i> Stock Details</h2>
-                        <div class="timeframe-selector">
-                            <button class="btn-timeframe active">1D</button>
-                            <button class="btn-timeframe">1W</button>
-                            <button class="btn-timeframe">1M</button>
-                            <button class="btn-timeframe">1Y</button>
+                <div class="grid-container">
+                    <!-- Existing dashboard content -->
+                </div>
+            </div>
+
+            <!-- My Picks Page -->
+            <div class="page" id="my-picks-page" style="display: none;">
+                <h2 class="page-title">My Latest Stock Picks</h2>
+                <div class="picks-container">
+                    <div class="pick-card latest-pick">
+                        <h3>Latest Pick: NVDA</h3>
+                        <div class="pick-content">
+                            <h4>NVIDIA Corporation (NVDA) - AI & Semiconductor Leader</h4>
+                            <div class="pick-details">
+                                <p class="pick-date">Date: November 15, 2024</p>
+                                <p class="pick-price">Entry Price: $485.50</p>
+                                <p class="pick-target">Target Price: $560.00</p>
+                                <p class="pick-stop">Stop Loss: $450.00</p>
+                            </div>
+                            <div class="analysis">
+                                <h4>Investment Thesis:</h4>
+                                <ul>
+                                    <li>Market leader in AI chips and GPU technology</li>
+                                    <li>Strong data center growth and AI adoption</li>
+                                    <li>Robust financial performance and margins</li>
+                                    <li>Technical breakout above key resistance</li>
+                                </ul>
+                                <p class="risk-disclosure">* Past performance does not guarantee future results. This is not financial advice.</p>
+                            </div>
                         </div>
                     </div>
-                    <div id="stock-info">
-                        <p class="select-stock-message">Select a stock to view details</p>
+                    <!-- Historical Picks -->
+                    <div class="historical-picks">
+                        <h3>Performance Track Record</h3>
+                        <table id="picks-history">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Symbol</th>
+                                    <th>Entry</th>
+                                    <th>Exit</th>
+                                    <th>Return</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Sample historical picks -->
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="stock-chart"></div>
-                    <div id="trading-controls"></div>
                 </div>
+            </div>
 
-                <div class="card market-table-card">
-                    <div class="card-header">
-                        <h2><i class="fas fa-table"></i> Portfolio & Positions</h2>
-                        <div class="filter-buttons">
-                            <button class="btn-filter active">All</button>
-                            <button class="btn-filter">Active Trades</button>
-                            <button class="btn-filter">Closed Positions</button>
-                            <button class="btn-filter">Watchlist</button>
+            <!-- Macro Analysis Page -->
+            <div class="page" id="macro-page" style="display: none;">
+                <h2 class="page-title">Macroeconomic Analysis</h2>
+                <div class="macro-container">
+                    <div class="macro-summary">
+                        <h3>Global Market Overview</h3>
+                        <div class="macro-content">
+                            <div class="macro-section">
+                                <h4>Key Indicators</h4>
+                                <div class="indicator-grid">
+                                    <div class="indicator-card">
+                                        <span class="indicator-title">US 10Y Yield</span>
+                                        <span class="indicator-value">4.62%</span>
+                                    </div>
+                                    <div class="indicator-card">
+                                        <span class="indicator-title">USD Index</span>
+                                        <span class="indicator-value">104.2</span>
+                                    </div>
+                                    <div class="indicator-card">
+                                        <span class="indicator-title">VIX</span>
+                                        <span class="indicator-value">14.8</span>
+                                    </div>
+                                    <div class="indicator-card">
+                                        <span class="indicator-title">Gold</span>
+                                        <span class="indicator-value">$1,980</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="macro-section">
+                                <h4>Current Market Themes</h4>
+                                <ul class="theme-list">
+                                    <li>Fed Policy & Interest Rates</li>
+                                    <li>AI & Technology Innovation</li>
+                                    <li>Geopolitical Tensions</li>
+                                    <li>Global Economic Growth</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <table id="positions-table">
-                        <thead>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Position</th>
-                                <th>Avg Price</th>
-                                <th>Current</th>
-                                <th>P/L</th>
-                                <th>P/L %</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                </div>
+            </div>
+
+            <!-- Model Portfolio Page -->
+            <div class="page" id="model-page" style="display: none;">
+                <h2 class="page-title">Model Portfolio</h2>
+                <div class="model-portfolio-container">
+                    <div class="portfolio-summary">
+                        <div class="summary-card">
+                            <h3>Portfolio Overview</h3>
+                            <div class="portfolio-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Total Value</span>
+                                    <span class="stat-value">$250,000</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Cash</span>
+                                    <span class="stat-value">$25,000</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">YTD Return</span>
+                                    <span class="stat-value positive">+15.8%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="allocation-chart">
+                            <!-- Sector allocation chart will be rendered here -->
+                        </div>
+                    </div>
+                    <div class="portfolio-holdings">
+                        <h3>Current Holdings</h3>
+                        <table id="holdings-table">
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Shares</th>
+                                    <th>Entry Price</th>
+                                    <th>Current Price</th>
+                                    <th>Market Value</th>
+                                    <th>Weight</th>
+                                    <th>Return</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Holdings will be dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
