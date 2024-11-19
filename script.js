@@ -1,5 +1,5 @@
 // Constants and Configuration
-const FINNHUB_API_KEY = 'cstudmhr01qour3slcu0cstudmhr01qour3slcug';
+const FINNHUB_API_KEY = 'FINNHUBAPIKEY';
 const MARKET_INDICES = {
     '^GSPC': 'sp500',
     '^IXIC': 'nasdaq',
