@@ -1,5 +1,5 @@
 // Replace with your Finnhub API key
-const FINNHUB_API_KEY = 'cstu199r01qour3sl6i0cstu199r01qour3sl6ig';
+const FINNHUB_API_KEY = 'cstudmhr01qour3slcu0cstudmhr01qour3slcug';
 
 // Paper Trading Account Class
 class PaperTradingAccount {
